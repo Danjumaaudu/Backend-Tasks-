@@ -1,13 +1,14 @@
 import express from "express";
-import {register,login} from "../controllers/auth-controllers";
+import {register,login, logout, deleteuser} from "../controllers/auth-controllers";
 import { authenticatetoken, AuthRequest } from "../middlewares/authMiddleware";
-import User from "../../models/userModel"
+import User from "../database/models/userModel"
 
 const router = express.Router();
 
 router.post("/register", register)
 router.post("/login",login)
-
+router.post("/logout", logout)
+router.delete("/delete",authenticatetoken,deleteuser)
 router.get("/profile",authenticatetoken,(req:AuthRequest,res)=>{
     res.status(201).json({
         Message: "Welcome prestigous one",
