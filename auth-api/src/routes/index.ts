@@ -1,11 +1,46 @@
 import { Router } from "express";
-import { register,login,deleteuser,logout } from "../controllers/auth-controllers"
+import { register, login, deleteuser, logout } from "../controllers/auth-controllers";
 
+const AuthRoutes = Router();
 
-const router = Router();
 /**
  * @swagger
- * /routes/authroutes/register:
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *         - password
+ *         - phoneNumber
+ *       properties:
+ *         username:
+ *           type: string
+ *           description: User's full name
+ *         email:
+ *           type: string
+ *           description: User's email
+ *         password:
+ *           type: string
+ *           description: User's password
+ *         phoneNumber:
+ *           type: string
+ *           description: User's phone number
+ *     ApiResponse:
+ *       type: object
+ *       properties:
+ *         data:
+ *           type: object
+ *           nullable: true
+ *         message:
+ *           type: string
+ *           nullable: true
+ */
+
+/**
+ * @swagger
+ * /api/auth/register:
  *   post:
  *     summary: Register a new user
  *     tags:
@@ -36,11 +71,11 @@ const router = Router();
  *       400:
  *         description: User already exists
  */
-router.post("/register", register)
+AuthRoutes.post("/register", register);
 
 /**
  * @swagger
- * /routes/authroutes/login:
+ * /api/auth/login:
  *   post:
  *     summary: Login a user
  *     tags:
@@ -65,11 +100,11 @@ router.post("/register", register)
  *       401:
  *         description: Invalid credentials
  */
-router.post("/login", login)
+AuthRoutes.post("/login", login);
 
 /**
  * @swagger
- * /routes/authroutes/logout:
+ * /api/auth/logout:
  *   post:
  *     summary: Logout a user
  *     tags:
@@ -78,11 +113,11 @@ router.post("/login", login)
  *       200:
  *         description: Logout successful
  */
-router.post("/logout", logout)
+AuthRoutes.post("/logout", logout);
 
 /**
  * @swagger
- * /routes/authroutes/delete/{id}:
+ * /api/auth/delete:
  *   delete:
  *     summary: Delete a user by ID
  *     tags:
@@ -100,6 +135,6 @@ router.post("/logout", logout)
  *       404:
  *         description: User not found
  */
-router.delete("/delete/:id", deleteuser);
+AuthRoutes.delete("/delete", deleteuser);
 
-export default router;
+export default AuthRoutes;

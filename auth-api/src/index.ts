@@ -5,7 +5,6 @@ import express, { Request, Response } from "express";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import connect from "./database/connection";
-import authRoutes from "./routes/authroutes"; // Adjust based on your structure
 import router from "./routes/authroutes";
 const app = express();
 const port = process.env.PORT || 8000;
@@ -24,13 +23,28 @@ const swaggerDefinition = {
       description: "Local development server",
     },
   ],
+  components: {
+    securitySchemes: {
+      BearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT", // Optional, indicates the token type
+      },
+    },
+  },
+  security: [
+    {
+      BearerAuth: [],
+    },
+  ],
+
 };
 
 const options = {
   swaggerDefinition,
   apis: [
-    "./routes/*.ts",
-    "./routes/**/*.ts",
+    "./src/routes/*.ts",  
+    "./src/controllers/*.ts"
   ],
 };
 
@@ -45,7 +59,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // --- Routes ---
-app.use("/routes/authroutes", router);
+app.use("/api/auth", router);
 
 
 // --- Start Server ---
