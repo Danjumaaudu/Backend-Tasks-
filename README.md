@@ -1,4 +1,4 @@
-# Backend API Project
+# Backend Project
 
 This is a backend API project built using **Node.js**, **Express**, **TypeScript**, **MongoDB**, and **SQL**. It is designed to help beginners understand the structure and concepts of backend development with practical tasks they can work on to sharpen their skills.
 
