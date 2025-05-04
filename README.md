@@ -61,4 +61,4 @@ Create a .env file at the root of the project with your MongoDB and SQL database
 ✍🏽 Author
 Muhammed Audu
 GitHub: @Danjumaaudu
-LinkedIn: audu-muhammed
+LinkedIn: linkedin.com/in/audu-muhammed-80101b2a5
